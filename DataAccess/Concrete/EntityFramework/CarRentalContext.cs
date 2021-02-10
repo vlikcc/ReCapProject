@@ -10,7 +10,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = VLIKCCPC,InitialCatalog = CarRental,Trusted_Connection=True");
+            optionsBuilder.UseSqlServer("Data Source = VLIKCCPC; Initial Catalog = CarRental; Integrated Security = True");
         }
         public DbSet <Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
