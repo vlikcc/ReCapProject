@@ -12,12 +12,12 @@ namespace UIConsole
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCarDal ());
-            var result = carManager.GetCarDetails();
-            foreach (var item in result)
-            {
-                Console.WriteLine(item.CarName);
-            }
+            //CarManager carManager = new CarManager(new EfCarDal ());
+            //var result = carManager.GetCarDetails();
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine(item.CarName);
+            //}
             
 
             
