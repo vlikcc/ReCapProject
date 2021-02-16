@@ -11,29 +11,28 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class RentalsController : ControllerBase
     {
-        IUserService _userService;
+        IRentalService _rentalService;
 
-        public UsersController(IUserService userService)
+        public RentalsController(IRentalService rentalService)
         {
-            _userService = userService;
+            _rentalService = rentalService;
         }
-        
         [HttpPost("Add")]
-        public IActionResult Add(User user )
+        public IActionResult Add(Rental rental)
         {
-            var result = _userService.Add(user);
-            if (result.Success )
+            var result = _rentalService.Add(rental);
+            if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
         [HttpPost("Delete")]
-        public IActionResult Delete(User user)
+        public IActionResult Delete(Rental rental)
         {
-            var result = _userService.Delete(user);
+            var result = _rentalService.Delete(rental);
             if (result.Success)
             {
                 return Ok(result);
@@ -41,9 +40,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Update")]
-        public IActionResult Update(User user)
+        public IActionResult Update(Rental rental)
         {
-            var result = _userService.Delete(user);
+            var result = _rentalService.Delete(rental);
             if (result.Success)
             {
                 return Ok(result);
@@ -53,7 +52,7 @@ namespace WebAPI.Controllers
         [HttpGet("GetById")]
         public IActionResult GetById(int id)
         {
-            var result = _userService.GetById(id);
+            var result = _rentalService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -63,7 +62,7 @@ namespace WebAPI.Controllers
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
-            var result = _userService.GetAll();
+            var result = _rentalService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
