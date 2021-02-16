@@ -1,3 +1,10 @@
+using Business.Abstract;
+using Business.Concrete;
+using Core.Business;
+using Core.Entities;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +33,30 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<ICarService, CarManager>();            
+            services.AddSingleton<IEntityService<Car>, ICarService>();
+            services.AddSingleton<ICarDal, EfCarDal>();
+
+            services.AddSingleton<IBrandService , BrandManager>();
+            services.AddSingleton<IEntityService<Brand>, IBrandService>();
+            services.AddSingleton<IBrandDal , EfBrandDal>();
+
+            services.AddSingleton<IColorService , ColorManager >();
+            services.AddSingleton<IEntityService<CarColor>, IColorService >();
+            services.AddSingleton<ICarColorDal , EfCarColorDal>();
+
+            services.AddSingleton<IUserService , UserManager>();
+            services.AddSingleton<IEntityService<User>, IUserService>();
+            services.AddSingleton<IUserDal, EfUserDal>();
+
+            services.AddSingleton<ICustomerService, CustomerManager>();
+            services.AddSingleton<IEntityService<Customer>, ICustomerService>();
+            services.AddSingleton<ICustomerDal, EfCustomerDal>();
+
+            services.AddSingleton<IRentalService, RentalManager>();
+            services.AddSingleton<IEntityService<Rental>, IRentalService>();
+            services.AddSingleton<IRentalDal, EfRentalDal >();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

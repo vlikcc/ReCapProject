@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class CarManager : ICarServices
+    public class CarManager : ICarService
     {
         ICarDal _carDal;
 
