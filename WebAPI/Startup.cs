@@ -32,30 +32,7 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddSingleton<ICarService, CarManager>();            
-            services.AddSingleton<IEntityService<Car>, ICarService>();
-            services.AddSingleton<ICarDal, EfCarDal>();
-
-            services.AddSingleton<IBrandService , BrandManager>();
-            services.AddSingleton<IEntityService<Brand>, IBrandService>();
-            services.AddSingleton<IBrandDal , EfBrandDal>();
-
-            services.AddSingleton<IColorService , ColorManager >();
-            services.AddSingleton<IEntityService<CarColor>, IColorService >();
-            services.AddSingleton<ICarColorDal , EfCarColorDal>();
-
-            services.AddSingleton<IUserService , UserManager>();
-            services.AddSingleton<IEntityService<User>, IUserService>();
-            services.AddSingleton<IUserDal, EfUserDal>();
-
-            services.AddSingleton<ICustomerService, CustomerManager>();
-            services.AddSingleton<IEntityService<Customer>, ICustomerService>();
-            services.AddSingleton<ICustomerDal, EfCustomerDal>();
-
-            services.AddSingleton<IRentalService, RentalManager>();
-            services.AddSingleton<IEntityService<Rental>, IRentalService>();
-            services.AddSingleton<IRentalDal, EfRentalDal >();
+            services.AddControllers();          
 
         }
 

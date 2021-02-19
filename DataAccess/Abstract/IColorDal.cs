@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccess.Abstract
 {
-    public interface ICarColorDal:IEntityRepository<CarColor>
+    public interface IColorDal:IEntityRepository<CarColor>
     {
 
     }
