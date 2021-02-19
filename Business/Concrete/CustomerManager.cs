@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -10,6 +12,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
+    [ValidationAspect(typeof(CustomerValidator))]
     public class CustomerManager : ICustomerService
     {
         ICustomerDal _customerDal;

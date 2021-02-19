@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Business;
 using Core.Entities;
 using Core.Utilities.Results;
@@ -13,6 +15,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
+    [ValidationAspect(typeof(BrandValidator))]
     public class BrandManager : IBrandService
     {
         IBrandDal _brandDal;
