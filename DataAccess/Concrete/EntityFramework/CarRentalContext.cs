@@ -6,14 +6,17 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class CarRentalContext:DbContext
+    public class CarRentalContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=VLIKCCPC\SQLEXPRESS;Initial Catalog=CarRental;Integrated Security=True");
         }
-        public DbSet <Car> Cars { get; set; }
+        public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<CarColor> Colors { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 }
