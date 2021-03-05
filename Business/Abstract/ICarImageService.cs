@@ -10,8 +10,8 @@ namespace Business.Abstract
 {
     public interface ICarImageService:IEntityService<CarImage>
     {
-        IResult AddWithExtensions(CarImage carImage, IFormFile file);
+        IResult Add2(CarImage carImage, IFormFile file);
+        IResult Update2(CarImage carImage, IFormFile file);
         IResult GetImagesByCarId(int carId);
-        IResult UpdateWithExtensions(CarImage carImage, IFormFile file);
     }
 }

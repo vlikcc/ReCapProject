@@ -11,6 +11,7 @@ namespace Core.Business
         IResult Delete(T entitiy);
         IDataResult<List<T>> GetAll();
         IDataResult<T> GetById(int id);
+      
 
     }
 }

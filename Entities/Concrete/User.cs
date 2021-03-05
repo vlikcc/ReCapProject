@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    [NotMapped]
+   // [NotMapped]
     public class User:IEntity
     {
         public int Id { get; set; }

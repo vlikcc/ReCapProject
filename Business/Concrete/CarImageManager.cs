@@ -1,7 +1,5 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using Business.ValidationRules.FluentValidation;
-using Core.Aspects.Autofac.Validation;
 using Core.Business;
 using Core.Utilities.Helpers;
 using Core.Utilities.Results;
@@ -10,6 +8,7 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -24,13 +23,7 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        public IResult Add(CarImage carImage)
-        {
-            throw new NotImplementedException();
-        }
-
-        [ValidationAspect(typeof(CarImageValidator))]
-        public IResult AddWithExtensions(CarImage carImage, IFormFile file)
+        public IResult Add2(CarImage carImage, IFormFile file)
         {
             IResult result = BusinessRules.Run(CheckImageLimit(carImage));
             if (result != null)
@@ -38,9 +31,14 @@ namespace Business.Concrete
                 return result;
             }
             carImage.ImagePath = FileHelper.AddAsync(file);
+            carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);
             return new SuccessResult();
+        }
 
+        public IResult Add(CarImage entity)
+        {
+            throw new NotImplementedException();
         }
 
         public IResult Delete(CarImage carImage)
@@ -56,8 +54,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
 
-
-
+        public IDataResult<CarImage> GetById(int id)
+        {
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id));
+        }
         public IResult GetImagesByCarId(int carId)
         {
             var result = _carImageDal.GetAll(ci => ci.CarId == carId);
@@ -69,15 +69,18 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(result);
         }
 
-        public IResult Update(CarImage carImage)
+        public IResult Update2(CarImage carImage, IFormFile file)
         {
-            throw new NotImplementedException();
+            CarImage imageForUpdate = _carImageDal.Get(c => c.Id == carImage.Id);
+            var imagePath = imageForUpdate.ImagePath;
+            carImage.ImagePath = FileHelper.UpdateAsync(imagePath, file);
+            _carImageDal.Update(carImage);
+            return new SuccessResult();
         }
 
-
-        public IDataResult<CarImage> GetById(int id)
+        public IResult Update(CarImage entity)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id));
+            throw new NotImplementedException();
         }
         private IResult CheckImageLimit(CarImage carImage)
         {
@@ -90,16 +93,5 @@ namespace Business.Concrete
             return new SuccessResult();
 
         }
-
-        [ValidationAspect(typeof(CarImageValidator))]
-        public IResult UpdateWithExtensions(CarImage carImage, IFormFile file)
-        {
-            CarImage imageForUpdate = _carImageDal.Get(c => c.Id == carImage.Id);
-            var imagePath = imageForUpdate.ImagePath;
-            carImage.ImagePath = FileHelper.UpdateAsync(imagePath, file);
-            _carImageDal.Update(carImage);
-            return new SuccessResult();
-        }
     }
-
 }

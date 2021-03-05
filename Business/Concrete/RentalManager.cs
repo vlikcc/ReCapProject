@@ -30,12 +30,14 @@ namespace Business.Concrete
             }
             return new ErrorResult();
         }
+        
 
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalDeleted);
         }
+               
 
         public IDataResult<List<Rental>> GetAll()
         {
@@ -52,5 +54,6 @@ namespace Business.Concrete
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
         }
+                
     }
 }

@@ -31,13 +31,15 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+       
+
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
             return new SuccessResult();
 
         }
-
+       
         public IDataResult<List<Brand>> GetAll()
         {
             
@@ -54,5 +56,6 @@ namespace Business.Concrete
             _brandDal.Update(brand);
             return new SuccessResult();
         }
+                
     }
 }

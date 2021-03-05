@@ -10,35 +10,37 @@ namespace Core.Utilities.Helpers
 {
     public class FileHelper
     {
-        public static (string newPath,string tempPath )CreateNewPath(IFormFile formFile)
+        public static string  CreateNewPath(IFormFile formFile)
         {
             FileInfo fileInfo = new FileInfo(formFile.FileName);
             string fileExtension = fileInfo.Extension;
-            var uniqueFileName = Guid.NewGuid().ToString("N") + fileExtension;
-            string result = $"{Environment.CurrentDirectory + $@"\wwwroot\Images\"}{uniqueFileName}";
-            return (result, $@"\Images\{uniqueFileName}");
+            string tempPath = Environment.CurrentDirectory + @"\wwwroot\Images";
+            var newPath= Guid.NewGuid().ToString() + fileExtension;
+            string result = $@"{tempPath}\{newPath}";
+            return result;
         }
         public static string AddAsync(IFormFile formFile)
         {
-            var result = CreateNewPath(formFile);
+            
             var sourcePath = Path.GetTempFileName();
             using (var stream = new FileStream(sourcePath, FileMode.Create))
             {
                 formFile.CopyTo(stream);
             }
-            File.Move(sourcePath, result.newPath);
-            return result.tempPath;
+            var result = CreateNewPath(formFile);
+            File.Move(sourcePath, result);
+            return result;
         }
         public static string UpdateAsync(string sourcePath, IFormFile formFile)
         {
             var result = CreateNewPath(formFile);
-            using (var stream = new FileStream(result.newPath, FileMode.Create))
+            using (var stream = new FileStream(result, FileMode.Create))
             {
                 formFile.CopyTo(stream);
             }
 
             File.Delete(sourcePath);
-            return result.tempPath;
+            return result;
         }
         public static IResult DeleteAsync(string path)
         {

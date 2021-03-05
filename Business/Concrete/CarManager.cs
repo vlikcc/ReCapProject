@@ -29,11 +29,15 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
 
+        
+
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
+
+       
 
         public IDataResult<List<Car>> GetAll()
         {
@@ -65,5 +69,7 @@ namespace Business.Concrete
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
         }
+
+        
     }
 }

@@ -18,10 +18,14 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+       
+
         public IResult Delete(CarColor entitiy)
         {
             throw new NotImplementedException();
         }
+
+       
 
         public IDataResult<List<CarColor>> GetAll()
         {
@@ -37,5 +41,7 @@ namespace Business.Concrete
         {
             throw new NotImplementedException();
         }
+
+      
     }
 }
