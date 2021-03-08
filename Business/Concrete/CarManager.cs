@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    [ValidationAspect(typeof(CarValidator))]
+    
     public class CarManager : ICarService
     {
         ICarDal _carDal;
@@ -22,7 +22,7 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-       
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
@@ -64,6 +64,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == ColorId));
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
             _carDal.Update(car);

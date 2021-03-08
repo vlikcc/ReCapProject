@@ -6,9 +6,12 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    [NotMapped]
-    public class Customer:User,IEntity
-    {        
-        public string CompanyName { get; set; }
+    
+    public class Customer:IEntity
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int CompanyId { get; set; }
+
     }
 }

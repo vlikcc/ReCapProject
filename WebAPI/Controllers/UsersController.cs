@@ -14,10 +14,12 @@ namespace WebAPI.Controllers
     public class UsersController : ControllerBase
     {
         IUserService _userService;
+        
 
         public UsersController(IUserService userService)
         {
             _userService = userService;
+            
         }
         
         [HttpPost("Add")]

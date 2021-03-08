@@ -15,9 +15,10 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(u => u.FirstName).MinimumLength(2);
             RuleFor(u => u.LastName).NotEmpty();
             RuleFor(u => u.LastName).MinimumLength(2);
-            RuleFor(u => u.Password).MinimumLength(8);
-            RuleFor(u => u.Password).MaximumLength(16);
-            RuleFor(u => u.Password).Must(u => ValidPassword(u)).WithMessage("Şifre en az 8 en fazla 16 karakter olmalıdır. Şifre büyük harf, küçük harf ve rakam içermelidir.");            
+            
+            //RuleFor(u => u.PasswordH).MinimumLength(8);
+            //RuleFor(u => u.Password).MaximumLength(16);
+            //RuleFor(u => u.Password).Must(u => ValidPassword(u)).WithMessage("Şifre en az 8 en fazla 16 karakter olmalıdır. Şifre büyük harf, küçük harf ve rakam içermelidir.");            
         }
         private bool ValidPassword(string password)
         {
