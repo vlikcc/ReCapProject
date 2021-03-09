@@ -2,7 +2,7 @@
 using Core.Utilities.Results;
 using System.Collections.Generic;
 
-namespace Core.Business
+namespace Core.Services
 {
     public interface IEntityService<T> where T : class, IEntity, new()
     {
