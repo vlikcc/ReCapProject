@@ -23,7 +23,7 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        public IResult Add2(CarImage carImage, IFormFile file)
+        public IResult AddFromFile(CarImage carImage, IFormFile file)
         {
             IResult result = BusinessRules.Run(CheckImageLimit(carImage));
             if (result != null)
@@ -60,16 +60,23 @@ namespace Business.Concrete
         }
         public IResult GetImagesByCarId(int carId)
         {
-            var result = _carImageDal.GetAll(ci => ci.CarId == carId);
+            var result = _carImageDal.GetAll(carImage => carImage.CarId == carId);
             if (!result.Any())
             {
-                List<CarImage> carImages = new List<CarImage>() { new CarImage { CarId = carId, ImagePath = @"\Images\defaultCar.png" } };
+                List<CarImage> carImages = new List<CarImage>()
+                {
+                    new CarImage {
+                        CarId = carId,
+                        ImagePath = @"\Images\defaultCar.png",
+                        Date = DateTime.Now
+                    } 
+                };
                 return new SuccessDataResult<List<CarImage>>(carImages);
             }
             return new SuccessDataResult<List<CarImage>>(result);
         }
 
-        public IResult Update2(CarImage carImage, IFormFile file)
+        public IResult UpdateFromFile(CarImage carImage, IFormFile file)
         {
             CarImage imageForUpdate = _carImageDal.Get(c => c.Id == carImage.Id);
             var imagePath = imageForUpdate.ImagePath;
