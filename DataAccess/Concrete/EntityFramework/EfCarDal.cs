@@ -18,20 +18,24 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (CarRentalContext context = new CarRentalContext())
             {
-                var result = from b in context.Brands
-                             join c in context.Cars
-                             on b.Id equals c.BrandId
+                var result = from c in context.Cars
+                             join b in context.Brands
+                             on c.BrandId equals b.Id
                              join col in context.Colors
-                             on c.ColorId equals col.Id 
+                             on c.ColorId equals col.Id
+                             join images in context.CarImages
+                             on c.Id equals images.CarId
                              select new CarDetailsDto
                              {
                                  CarId = c.Id,
                                  CarName = c.CarName,
-                                 BrandName = b.BrandName,
-                                 ColorName =col.ColorName,
                                  ModelYear = c.ModelYear,
                                  DailyPrice = c.DailyPrice,
-                                 Description = c.Description
+                                 Description = c.Description,
+                                 BrandName = b.BrandName,
+                                 ColorName = col.ColorName,
+                                 ImagePath = images.ImagePath   
+                                
                              };
                              
                 return result.ToList();
@@ -39,3 +43,11 @@ namespace DataAccess.Concrete.EntityFramework
         }
     }
 }
+//public int CarId { get; set; }
+//public string CarName { get; set; }
+//public int ModelYear { get; set; }
+//public decimal DailyPrice { get; set; }
+//public string Description { get; set; }
+//public string BrandName { get; set; }
+//public string ColorName { get; set; }
+//public List<string> Images { get; set; }
