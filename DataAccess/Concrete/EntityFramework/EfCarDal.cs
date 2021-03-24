@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal :EfEntityRepositoryBase<Car,CarRentalContext >,ICarDal 
     {
-        public List<CarDetailsDto> GetCarDetails()
+        public List<CarDetailsDto> GetCarDetails(Expression<Func<CarDetailsDto, bool>> filter = null)
         {
             using (CarRentalContext context = new CarRentalContext())
             {
@@ -37,8 +37,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  ImagePath = images.ImagePath   
                                 
                              };
-                             
-                return result.ToList();
+
+                return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
     }
