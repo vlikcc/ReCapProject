@@ -29,7 +29,7 @@ namespace Core.Utilities.Helpers
             }
             var result = CreateNewPath(formFile);
             File.Move(sourcePath, result);
-            return result;
+            return result.Replace("\\","/");
         }
         public static string UpdateAsync(string sourcePath, IFormFile formFile)
         {

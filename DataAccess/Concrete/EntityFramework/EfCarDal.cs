@@ -22,9 +22,7 @@ namespace DataAccess.Concrete.EntityFramework
                              join b in context.Brands
                              on c.BrandId equals b.Id
                              join col in context.Colors
-                             on c.ColorId equals col.Id
-                             join images in context.CarImages
-                             on c.Id equals images.CarId
+                             on c.ColorId equals col.Id                             
                              select new CarDetailsDto
                              {
                                  CarId = c.Id,
@@ -34,7 +32,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  Description = c.Description,
                                  BrandName = b.BrandName,
                                  ColorName = col.ColorName,
-                                 ImagePath = images.ImagePath   
+                                 ImagePath = (from image in context.CarImages where image.CarId == c.Id select image.ImagePath).ToArray() 
                                 
                              };
 
