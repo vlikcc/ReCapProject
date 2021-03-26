@@ -8,44 +8,49 @@ using System.Text;
 
 namespace Core.Utilities.Helpers
 {
-    public class FileHelper
+    public  class FileHelper
     {
-        public static string  CreateNewPath(IFormFile formFile)
+
+        static string directory = Directory.GetCurrentDirectory() + @"\wwwroot\";
+        static string path = @"Images\";
+
+        public static string AddAsync(IFormFile file)
         {
-            FileInfo fileInfo = new FileInfo(formFile.FileName);
-            string fileExtension = fileInfo.Extension;
-            string tempPath = Environment.CurrentDirectory+ @"\wwwroot\Images";
-            var newPath= Guid.NewGuid().ToString() + fileExtension;
-            string result = $@"{tempPath}\{newPath}";
-            return result;
-        }
-        public static string AddAsync(IFormFile formFile)
-        {
-            
-            var sourcePath = Path.GetTempFileName();
-            using (var stream = new FileStream(sourcePath, FileMode.Create))
+            string extension = Path.GetExtension(file.FileName);
+            string newFileName = Guid.NewGuid().ToString("N") + extension;
+
+            if (!Directory.Exists(directory + path))
             {
-                formFile.CopyTo(stream);
-            }
-            var result = CreateNewPath(formFile);
-            File.Move(sourcePath, result);
-            return result.Replace("\\","/");
-        }
-        public static string UpdateAsync(string sourcePath, IFormFile formFile)
-        {
-            var result = CreateNewPath(formFile);
-            using (var stream = new FileStream(result, FileMode.Create))
-            {
-                formFile.CopyTo(stream);
+                Directory.CreateDirectory(directory + path);
             }
 
-            File.Delete(sourcePath);
-            return result;
+            using (FileStream fileStream = File.Create(directory + path + newFileName))
+            {
+                file.CopyTo(fileStream);
+                fileStream.Flush();
+            }
+
+
+            return (path + newFileName).Replace("\\", "/");
         }
-        public static IResult DeleteAsync(string path)
+
+
+        public static IResult DeleteAsync(string imagePath)
         {
-            File.Delete(path);
+            if (File.Exists(directory + imagePath.Replace("/", "\\")) && Path.GetFileName(imagePath) != "image.bmp")
+            {
+                File.Delete(directory + imagePath.Replace("/", "\\"));
+            }
             return new SuccessResult();
+        }
+
+
+        public static string UpdateAsync( string sourcePath, IFormFile file)
+        {
+            DeleteAsync(sourcePath);
+            return AddAsync(file);
+
+
         }
     }
 }
