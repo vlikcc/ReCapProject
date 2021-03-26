@@ -72,9 +72,6 @@ namespace DataAccess.Concrete.InMemory
             carForUpdate.Description = car.Description;
         }
 
-        List<CarDetailsDto> GetCarDetails()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
