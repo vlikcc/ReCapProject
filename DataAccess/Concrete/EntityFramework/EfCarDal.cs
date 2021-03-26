@@ -33,8 +33,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
                                  BrandName = b.BrandName,
-                                 ColorName = col.ColorName,
-                                 ImagePath = images.ImagePath   
+                                 ColorName = col.ColorName                          
                                 
                              };
 
@@ -43,11 +42,3 @@ namespace DataAccess.Concrete.EntityFramework
         }
     }
 }
-//public int CarId { get; set; }
-//public string CarName { get; set; }
-//public int ModelYear { get; set; }
-//public decimal DailyPrice { get; set; }
-//public string Description { get; set; }
-//public string BrandName { get; set; }
-//public string ColorName { get; set; }
-//public List<string> Images { get; set; }

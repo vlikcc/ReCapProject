@@ -14,7 +14,7 @@ namespace Core.Utilities.Helpers
         {
             FileInfo fileInfo = new FileInfo(formFile.FileName);
             string fileExtension = fileInfo.Extension;
-            string tempPath = Environment.CurrentDirectory + @"\wwwroot\Images";
+            string tempPath = Environment.CurrentDirectory+ @"\wwwroot\Images";
             var newPath= Guid.NewGuid().ToString() + fileExtension;
             string result = $@"{tempPath}\{newPath}";
             return result;
@@ -29,7 +29,7 @@ namespace Core.Utilities.Helpers
             }
             var result = CreateNewPath(formFile);
             File.Move(sourcePath, result);
-            return result;
+            return result.Replace("\\","/");
         }
         public static string UpdateAsync(string sourcePath, IFormFile formFile)
         {

@@ -70,5 +70,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
+
+        [HttpPost("delete")]
+        public IActionResult Delete([FromForm] CarImage carImage, [FromForm(Name = "Image")] IFormFile file)
+        {
+            var result = _carImageService.Delete(carImage);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
     }
 }
