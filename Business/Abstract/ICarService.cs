@@ -15,6 +15,8 @@ namespace Business.Abstract
         IDataResult<List<Car>> GetCarsByColorId(int ColorId);       
         IDataResult <List<CarDetailsDto>> GetCarDetails();
         IDataResult<List<CarDetailsDto>> GetCarDetailsByCarId(int CarId);
+        IDataResult<List<CarDetailsDto>> GetCarDetailsByBrandId(int BrandId);
+        IDataResult<List<CarDetailsDto>> GetCarDetailsByColorId(int ColorId);
 
 
 
