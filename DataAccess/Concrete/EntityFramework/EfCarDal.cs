@@ -39,5 +39,7 @@ namespace DataAccess.Concrete.EntityFramework
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
+
+       
     }
 }

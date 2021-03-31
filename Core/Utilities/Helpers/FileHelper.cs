@@ -37,7 +37,7 @@ namespace Core.Utilities.Helpers
 
         public static IResult DeleteAsync(string imagePath)
         {
-            if (File.Exists(directory + imagePath.Replace("/", "\\")) && Path.GetFileName(imagePath) != "image.bmp")
+            if (File.Exists(directory + imagePath.Replace("/", "\\")) && Path.GetFileName(imagePath) != "default.jpg")
             {
                 File.Delete(directory + imagePath.Replace("/", "\\"));
             }
