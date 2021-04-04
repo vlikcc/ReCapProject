@@ -10,36 +10,47 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    [ValidationAspect(typeof(ColorValidator))]
+    
     public class ColorManager : IColorService
     {
-        public IResult Add(CarColor entity)
+        IColorDal _colorDal;
+
+        public ColorManager(IColorDal colorDal)
         {
-            throw new NotImplementedException();
+            _colorDal = colorDal;
+        }
+
+        [ValidationAspect(typeof(ColorValidator))]
+        public IResult Add(CarColor color)
+        {
+            _colorDal.Add(color);
+            return new SuccessResult();
         }
 
        
 
-        public IResult Delete(CarColor entitiy)
+        public IResult Delete(CarColor color)
         {
-            throw new NotImplementedException();
+            _colorDal.Delete(color);
+            return new SuccessResult();
         }
 
        
 
         public IDataResult<List<CarColor>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<CarColor>>(_colorDal.GetAll());
         }
 
         public IDataResult<CarColor> GetById(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<CarColor>(_colorDal.Get(c => c.Id == id));
         }
 
-        public IResult Update(CarColor entity)
+        public IResult Update(CarColor color)
         {
-            throw new NotImplementedException();
+            _colorDal.Update(color);
+            return new SuccessResult();
         }
 
       
