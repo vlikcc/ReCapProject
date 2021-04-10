@@ -39,6 +39,18 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpPost("DeleteCarByCarId")]
+        public IActionResult DeleteCarByCarId(int CarId)
+        {
+            var result = _carService.DeleteCarByCarId(CarId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPost("Update")]
         public IActionResult Update(Car car)
         {
