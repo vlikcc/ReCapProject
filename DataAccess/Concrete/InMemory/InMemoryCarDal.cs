@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Entities.DTOs;
+using Core.Utilities.Results;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -34,6 +35,11 @@ namespace DataAccess.Concrete.InMemory
         {
             Car carForDelete;
             carForDelete = _cars.SingleOrDefault(c => c.Id == car.Id);
+        }
+
+        public IResult DeleteCarByCarId(int CarId)
+        {
+            throw new NotImplementedException();
         }
 
         public Car Get(Expression<Func<Car, bool>> filter)

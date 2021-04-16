@@ -1,5 +1,6 @@
 ﻿using Core.DataAccess;
 using Core.DataAccess.EntityFramework;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -10,10 +11,27 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
+
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal :EfEntityRepositoryBase<Car,CarRentalContext >,ICarDal 
     {
+        public IResult DeleteCarByCarId(int CarId)
+        {
+            using (CarRentalContext context = new CarRentalContext())
+            {
+                Car car = new Car() { Id = CarId };
+                context.Cars.Attach(car);
+                context.Cars.Remove(car);
+                context.SaveChanges();
+
+            }
+            return new SuccessResult();
+                
+
+
+        }
+
         public List<CarDetailsDto> GetCarDetails(Expression<Func<CarDetailsDto, bool>> filter = null)
         {
             using (CarRentalContext context = new CarRentalContext())
@@ -41,6 +59,8 @@ namespace DataAccess.Concrete.EntityFramework
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
+
+        
 
        
     }
